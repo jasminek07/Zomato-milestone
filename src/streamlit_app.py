@@ -1,3 +1,8 @@
+import sys
+from pathlib import Path
+# Insert project root to sys.path to allow absolute imports of 'src' when run as a streamlit script
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 import streamlit as st
 import logging
 from src.data.store import RestaurantStore
