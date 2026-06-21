@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Zomato AI - Discover Your Perfect Restaurant</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "surface-container-low": "#1b1b1f",
+                      "surface-container-lowest": "#0e0e12",
+                      "secondary-fixed-dim": "#ffb955",
+                      "background": "#131317",
+                      "surface-container": "#1f1f23",
+                      "outline": "#ab8987",
+                      "on-tertiary-fixed-variant": "#005321",
+                      "tertiary-container": "#00a74b",
+                      "error": "#ffb4ab",
+                      "primary-container": "#ff535a",
+                      "surface-variant": "#353439",
+                      "primary-fixed": "#ffdad8",
+                      "inverse-surface": "#e4e1e7",
+                      "surface-bright": "#39393d",
+                      "primary": "#ffb3b1",
+                      "inverse-on-surface": "#303034",
+                      "tertiary-fixed": "#6bff8f",
+                      "on-error-container": "#ffdad6",
+                      "on-secondary-fixed": "#291800",
+                      "on-secondary-container": "#4f3100",
+                      "on-secondary-fixed-variant": "#633f00",
+                      "secondary-container": "#dc9100",
+                      "surface": "#131317",
+                      "secondary": "#ffb955",
+                      "on-secondary": "#452b00",
+                      "surface-dim": "#131317",
+                      "on-primary-fixed": "#410007",
+                      "on-primary-fixed-variant": "#92001c",
+                      "surface-container-high": "#2a292e",
+                      "surface-tint": "#ffb3b1",
+                      "primary-fixed-dim": "#ffb3b1",
+                      "on-tertiary": "#003915",
+                      "on-background": "#e4e1e7",
+                      "outline-variant": "#5b403f",
+                      "on-surface-variant": "#e4bebc",
+                      "tertiary-fixed-dim": "#4ae176",
+                      "on-primary": "#680011",
+                      "error-container": "#93000a",
+                      "secondary-fixed": "#ffddb4",
+                      "on-tertiary-fixed": "#002109",
+                      "inverse-primary": "#bb162c",
+                      "on-primary-container": "#5b000e",
+                      "on-surface": "#e4e1e7",
+                      "surface-container-highest": "#353439",
+                      "tertiary": "#4ae176",
+                      "on-error": "#690005",
+                      "on-tertiary-container": "#003111"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "xs": "4px",
+                      "gutter": "20px",
+                      "xl": "40px",
+                      "margin-mobile": "16px",
+                      "margin-desktop": "64px",
+                      "lg": "24px",
+                      "md": "16px",
+                      "sm": "8px"
+              },
+              "fontFamily": {
+                      "body-lg": ["Outfit"],
+                      "body-sm": ["Outfit"],
+                      "display-lg-mobile": ["Outfit"],
+                      "headline-md": ["Outfit"],
+                      "label-md": ["Outfit"],
+                      "body-md": ["Outfit"],
+                      "title-lg": ["Outfit"],
+                      "display-xl": ["Outfit"],
+                      "display-lg": ["Outfit"]
+              },
+              "fontSize": {
+                      "body-lg": ["18px", {"lineHeight": "28px", "fontWeight": "400"}],
+                      "body-sm": ["14px", {"lineHeight": "20px", "fontWeight": "300"}],
+                      "display-lg-mobile": ["32px", {"lineHeight": "40px", "letterSpacing": "-0.02em", "fontWeight": "800"}],
+                      "headline-md": ["24px", {"lineHeight": "32px", "letterSpacing": "-0.01em", "fontWeight": "600"}],
+                      "label-md": ["12px", {"lineHeight": "16px", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                      "body-md": ["16px", {"lineHeight": "24px", "fontWeight": "400"}],
+                      "title-lg": ["20px", {"lineHeight": "28px", "fontWeight": "600"}],
+                      "display-xl": ["64px", {"lineHeight": "72px", "letterSpacing": "-0.04em", "fontWeight": "800"}],
+                      "display-lg": ["48px", {"lineHeight": "56px", "letterSpacing": "-0.02em", "fontWeight": "800"}]
+              }
+            }
+          }
+        }
+    </script>
+<style>
+        body {
+            background-color: theme('colors.background');
+            color: theme('colors.on-background');
+            overflow-x: hidden;
+        }
+
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-panel-heavy {
+            background: rgba(31, 31, 35, 0.6);
+            backdrop-filter: blur(24px);
+            -webkit-backdrop-filter: blur(24px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .glow-red {
+            box-shadow: 0 0 15px rgba(226, 55, 68, 0.35);
+        }
+
+        /* Floating Orbs Animation */
+        @keyframes drift {
+            0% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -50px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+            100% { transform: translate(0, 0) scale(1); }
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: drift 20s infinite ease-in-out alternate;
+            z-index: 0;
+        }
+
+        .orb-red { background: theme('colors.primary-container'); width: 400px; height: 400px; top: -10%; left: 10%; animation-delay: 0s; }
+        .orb-purple { background: theme('colors.tertiary-container'); width: 500px; height: 500px; top: 30%; right: -10%; animation-delay: -5s; }
+        .orb-navy { background: #1e3a8a; width: 600px; height: 600px; bottom: -20%; left: 20%; animation-delay: -10s; }
+
+        /* Floating Food Emojis */
+        @keyframes floatFood {
+            0% { transform: translateY(0px) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.8; }
+            90% { opacity: 0.8; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        .floating-food {
+            position: absolute;
+            font-size: 2rem;
+            z-index: 1;
+            opacity: 0;
+        }
+
+        /* Scroll Reveal Utility */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: theme('colors.background'); }
+        ::-webkit-scrollbar-thumb { background: theme('colors.surface-variant'); border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: theme('colors.primary'); }
+        
+        .animated-underline {
+            position: relative;
+            display: inline-block;
+        }
+        .animated-underline::after {
+            content: '';
+            position: absolute;
+            width: 100%;
+            transform: scaleX(0);
+            height: 4px;
+            bottom: -8px;
+            left: 0;
+            background-color: theme('colors.primary');
+            transform-origin: bottom right;
+            transition: transform 0.5s ease-out;
+            border-radius: 2px;
+        }
+        .animated-underline.active::after {
+            transform: scaleX(1);
+            transform-origin: bottom left;
+        }
+
+        input[type="range"]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            background: theme('colors.primary');
+            cursor: pointer;
+            border-radius: 50%;
+            box-shadow: 0 0 10px rgba(255, 83, 90, 0.5);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="antialiased selection:bg-primary selection:text-on-primary">
+<!-- Ambient Background -->
+<div class="fixed inset-0 overflow-hidden pointer-events-none z-0">
+<div class="orb orb-red"></div>
+<div class="orb orb-purple"></div>
+<div class="orb orb-navy"></div>
+<!-- Floating Food Container (Populated via JS) -->
+<div class="absolute inset-0" id="food-container"></div>
+</div>
+<div class="relative z-10 flex flex-col min-h-screen">
+<!-- Navigation Component -->
+<header class="bg-surface/60 backdrop-blur-xl border-b border-white/10 shadow-2xl shadow-black/40 fixed top-0 w-full z-[100]">
+<div class="flex justify-between items-center w-full px-margin-mobile md:px-margin-desktop max-w-[1200px] mx-auto h-20">
+<!-- Brand Logo -->
+<div class="flex items-center gap-2 text-headline-md font-headline-md font-extrabold tracking-tighter">
+<span class="material-symbols-outlined text-primary text-3xl" style="font-variation-settings: 'FILL' 1;">restaurant</span>
+<span class="text-on-background">Zomato</span>
+<span class="text-primary">AI</span>
+</div>
+<!-- Desktop Nav -->
+<nav class="hidden md:flex items-center gap-8">
+<a class="text-primary font-bold border-b-2 border-primary pb-1" href="#">Home</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#how-it-works">How It Works</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#features">Features</a>
+<a class="text-on-surface-variant font-body-md hover:text-primary transition-colors" href="#try-it">Try It</a>
+</nav>
+<!-- CTA -->
+<a class="hidden md:flex items-center gap-2 bg-primary/10 text-primary hover:bg-primary/20 px-4 py-2 rounded-full transition-all duration-300 font-label-md text-label-md" href="#try-it">
+                    Get Recommendations
+                    <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<!-- Mobile Menu Button -->
+<button class="md:hidden text-on-background p-2">
+<span class="material-symbols-outlined">menu</span>
+</button>
+</div>
+</header>
+<!-- Hero Section -->
+<section class="min-h-screen flex items-center justify-center pt-20 px-margin-mobile md:px-margin-desktop relative">
+<div class="max-w-[1200px] mx-auto text-center z-10 w-full">
+<div class="reveal inline-flex items-center gap-2 bg-surface-container-high border border-white/10 rounded-full px-4 py-1.5 mb-8">
+<span>🤖</span>
+<span class="font-label-md text-label-md text-on-surface-variant">Powered by Groq AI</span>
+</div>
+<h1 class="reveal font-display-lg-mobile md:font-display-xl text-display-lg-mobile md:text-display-xl text-on-background mb-6 max-w-4xl mx-auto leading-tight">
+                    Discover Your <br class="md:hidden"/> <span class="animated-underline text-primary" id="hero-underline">Perfect Restaurant.</span>
+</h1>
+<p class="reveal font-body-lg text-body-lg text-on-surface-variant mb-12 max-w-2xl mx-auto">
+                    India's smartest dining assistant. Tell us what you're craving, your budget, and the vibe, and we'll instantly generate the ultimate curated list.
+                </p>
+<div class="reveal">
+<a class="inline-flex items-center justify-center gap-2 bg-[#e23744] hover:bg-primary text-white font-title-lg text-title-lg py-4 px-8 rounded-full transition-all duration-300 glow-red hover:scale-105 active:scale-95" href="#try-it">
+<span>✨</span> Find My Restaurant
+                    </a>
+</div>
+</div>
+</section>
+<!-- Footer Component -->
+<footer class="bg-surface-container-lowest w-full py-xl border-t border-white/5 mt-auto relative z-10">
+<div class="grid grid-cols-1 md:grid-cols-3 gap-xl px-margin-mobile md:px-margin-desktop max-w-[1200px] mx-auto">
+<div class="flex flex-col gap-4">
+<div class="text-title-lg font-title-lg text-primary">Zomato AI</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+                        © 2024 Zomato AI. Powered by LLM Discovery.
+                    </p>
+<div class="flex gap-2 text-on-surface-variant font-label-md text-label-md mt-2">
+<span class="bg-surface-container py-1 px-2 rounded">Groq</span>
+<span class="bg-surface-container py-1 px-2 rounded">FastAPI</span>
+<span class="bg-surface-container py-1 px-2 rounded">Llama 3</span>
+</div>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-title-lg text-title-lg text-on-background mb-2">Navigation</span>
+<a class="text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm hover:translate-x-1 transition-transform duration-200 focus:ring-2 focus:ring-primary w-max" href="#">Home</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm hover:translate-x-1 transition-transform duration-200 focus:ring-2 focus:ring-primary w-max" href="#how-it-works">How It Works</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm hover:translate-x-1 transition-transform duration-200 focus:ring-2 focus:ring-primary w-max" href="#features">Features</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm hover:translate-x-1 transition-transform duration-200 focus:ring-2 focus:ring-primary w-max" href="#try-it">Try It</a>
+</div>
+<div class="flex flex-col gap-2">
+<span class="font-title-lg text-title-lg text-on-background mb-2">Legal</span>
+<a class="text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm hover:translate-x-1 transition-transform duration-200 focus:ring-2 focus:ring-primary w-max" href="#">Privacy Policy</a>
+<a class="text-on-surface-variant hover:text-on-surface font-body-sm text-body-sm hover:translate-x-1 transition-transform duration-200 focus:ring-2 focus:ring-primary w-max" href="#">Terms of Service</a>
+</div>
+</div>
+</footer>
+</div>
+<!-- Scripts -->
+<script>
+        // Scroll Reveal Logic
+        const revealElements = document.querySelectorAll('.reveal');
+        
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Animated Underline Trigger
+        setTimeout(() => {
+            const underline = document.getElementById('hero-underline');
+            if(underline) underline.classList.add('active');
+        }, 800);
+
+        // Floating Food Logic
+        const foodEmojis = ['🍕', '🍜', '🍣', '🍷', '🍔', '🥗', '☕'];
+        const foodContainer = document.getElementById('food-container');
+
+        function createFloatingFood() {
+            const food = document.createElement('div');
+            food.className = 'floating-food';
+            food.textContent = foodEmojis[Math.floor(Math.random() * foodEmojis.length)];
+            
+            // Random positioning and timing
+            const startX = Math.random() * 100;
+            const duration = 15 + Math.random() * 20; // 15-35s
+            
+            food.style.left = `${startX}vw`;
+            food.style.bottom = '-50px';
+            food.style.animation = `floatFood ${duration}s linear forwards`;
+            
+            foodContainer.appendChild(food);
+
+            // Clean up
+            setTimeout(() => {
+                food.remove();
+            }, duration * 1000);
+        }
+
+        // Spawn food periodically
+        setInterval(createFloatingFood, 3000);
+        // Initial spawn
+        for(let i=0; i<5; i++) setTimeout(createFloatingFood, i * 1000);
+
+    </script>
+</body></html>

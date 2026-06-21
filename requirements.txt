@@ -1,0 +1,11 @@
+datasets
+pandas
+pydantic>=2.0.0
+fastapi
+uvicorn
+python-dotenv
+pytest
+pyarrow
+groq
+streamlit
+

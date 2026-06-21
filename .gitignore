@@ -1,0 +1,30 @@
+# Environment variables and secrets
+.env
+.env.local
+.env.production
+.env.development
+.env.staging
+.streamlit/secrets.toml
+
+# Python caches and virtual environments
+__pycache__/
+*.pyc
+.pytest_cache/
+.venv/
+venv/
+env/
+
+# Data cache (cached Hugging Face downloads)
+data/cache/
+
+# Node/Next.js files
+node_modules/
+.next/
+out/
+build/
+
+# Backups
+frontend_old/
+
+# macOS files
+.DS_Store
